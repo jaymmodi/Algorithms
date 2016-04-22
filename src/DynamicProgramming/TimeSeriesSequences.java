@@ -11,13 +11,13 @@ import java.util.stream.IntStream;
 public class TimeSeriesSequences {
 
     public static void main(String[] args) {
-        int k = 4;
-        int totalEvents = 3;
+        int k = 10;
+        int totalEvents = 100;
 
         System.out.println(getNumberOfSequences(k, totalEvents));
     }
 
-    private static int getNumberOfSequences(int k, int totalEvents) {
+    private static long getNumberOfSequences(int k, int totalEvents) {
         if (k == 1) {
             return totalEvents;
         }
@@ -28,15 +28,15 @@ public class TimeSeriesSequences {
 
         List<Integer> currentList = new ArrayList<>();
         getTotalSequences(allList, currentList, availableNumbers, k, 0);
-        System.out.println();
+
 
         return (getCount(allList, totalEvents) + nChooseK(totalEvents, k));
     }
 
-    private static int getCount(List<List<Integer>> allList, int totalEvents) {
-        int count = 0;
+    private static long getCount(List<List<Integer>> allList, int totalEvents) {
+        long count = 0;
         for (List<Integer> integers : allList) {
-            int levelCount = 1;
+            long levelCount = 1;
             for (Integer number : integers) {
                 levelCount = levelCount * nChooseK(totalEvents, number);
             }
@@ -56,7 +56,6 @@ public class TimeSeriesSequences {
         }
 
         for (int i = 0; i < availableNumbers.size(); i++) {
-
 
             int number = availableNumbers.get(i);
             currentList.add(number);
@@ -91,16 +90,16 @@ public class TimeSeriesSequences {
         return sum;
     }
 
-    private static int factorial(int number) {
+    private static long factorial(int number) {
         if (number == 0 || number == 1) {
             return 1;
         }
 
-        int dynamicArray[] = new int[number + 1];
+        long dynamicArray[] = new long[number + 1];
 
         dynamicArray[0] = 1;
         dynamicArray[1] = 1;
-        int factorial = 0;
+        long factorial = 0;
 
         if (dynamicArray[number] != 0) {
             return dynamicArray[number];
@@ -115,9 +114,25 @@ public class TimeSeriesSequences {
     }
 
 
-    private static int nChooseK(int n, int k) {
+    private static long nChooseK(int n, int k) {
+        if (k == 1) {
+            return n;
+        } else if (k == 0) {
+            return 1;
+        }
         if (n >= k) {
-            return factorial(n) / (factorial(k) * factorial(n - k));
+            long numerator = 1;
+            if (n - k > k) {
+                for (int i = n - k + 1; i <= n; i++) {
+                    numerator = numerator * i;
+                }
+                return numerator / factorial(k);
+            } else {
+                for (int i = k + 1; i <= n; i++) {
+                    numerator = numerator * i;
+                }
+                return numerator / factorial(n - k);
+            }
         } else
             return 0;
     }
