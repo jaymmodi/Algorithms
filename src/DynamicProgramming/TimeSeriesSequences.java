@@ -1,5 +1,8 @@
 package DynamicProgramming;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,10 +14,23 @@ import java.util.stream.IntStream;
 public class TimeSeriesSequences {
 
     public static void main(String[] args) {
-        int k = 10;
-        int totalEvents = 100;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println(getNumberOfSequences(k, totalEvents));
+        int k = 0;
+        int totalEvents = 0;
+
+        try {
+            System.out.println("Please specify a value for  'k' ");
+            k = Integer.parseInt(br.readLine());
+
+            System.out.println("Please specify a value for  'n' ");
+            totalEvents = Integer.parseInt(br.readLine());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Total number of sequences would be = " + getNumberOfSequences(k, totalEvents));
     }
 
     private static long getNumberOfSequences(int k, int totalEvents) {
