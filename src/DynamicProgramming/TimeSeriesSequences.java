@@ -20,10 +20,10 @@ public class TimeSeriesSequences {
         int totalEvents = 0;
 
         try {
-            System.out.println("Please specify a value for  'k' ");
+            System.out.println("Please specify a value for  'k' =");
             k = Integer.parseInt(br.readLine());
 
-            System.out.println("Please specify a value for  'n' ");
+            System.out.println("Please specify a value for  'n' =");
             totalEvents = Integer.parseInt(br.readLine());
 
         } catch (IOException e) {
@@ -97,13 +97,10 @@ public class TimeSeriesSequences {
     }
 
     private static int getSum(List<Integer> currentList) {
-        int sum = 0;
-
-        for (Integer integer : currentList) {
-            sum += integer;
-        }
-
-        return sum;
+        
+        return currentList.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     private static long factorial(int number) {
