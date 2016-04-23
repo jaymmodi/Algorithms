@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * Created by jay on 4/17/16.
+ * This code will return the count of all sequences for a given pair of n and k.
  */
 public class TimeSeriesSequences {
 
@@ -20,19 +20,30 @@ public class TimeSeriesSequences {
         int totalEvents = 0;
 
         try {
+            // The size of sequence
             System.out.println("Please specify a value for  'k' =");
             k = Integer.parseInt(br.readLine());
 
+            // This represents total number of events.
             System.out.println("Please specify a value for  'n' =");
             totalEvents = Integer.parseInt(br.readLine());
+
+            br.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        // This will print out the count for total number of sequences.
         System.out.println("Total number of sequences would be = " + getNumberOfSequences(k, totalEvents));
     }
 
+    /**
+     * This method will take in two parameters k and total events and will return the count for sequences.
+     * @param k - This represents the size of sequence.
+     * @param totalEvents - This represents total number of events
+     * @return integer - count of sequences.
+     */
     private static long getNumberOfSequences(int k, int totalEvents) {
         if (k == 1) {
             return totalEvents;
@@ -49,6 +60,12 @@ public class TimeSeriesSequences {
         return (getCount(allList, totalEvents) + nChooseK(totalEvents, k));
     }
 
+    /**
+     * This function will return the count for all possible combinations of size k
+     * @param allList - All combinations
+     * @param totalEvents - Total number of events
+     * @return integer - count of combinations.
+     */
     private static long getCount(List<List<Integer>> allList, int totalEvents) {
         long count = 0;
         for (List<Integer> integers : allList) {
@@ -63,6 +80,14 @@ public class TimeSeriesSequences {
         return count;
     }
 
+    /**
+     *  Recursive code to generate all possible combinations
+     * @param allList - This will store all list of combinations
+     * @param currentList - This the currentList in recursion stack
+     * @param availableNumbers - list of numbers to use to generate combinations
+     * @param k - size of sequence
+     * @param currentSum - current sum of numbers present in current list
+     */
     private static void getTotalSequences(List<List<Integer>> allList, List<Integer> currentList, List<Integer> availableNumbers, int k, int currentSum) {
 
         if (currentSum == k) {
@@ -96,13 +121,23 @@ public class TimeSeriesSequences {
         }
     }
 
+    /**
+     * This funciton will return the sum of all numbers in a list
+     * @param currentList - Current list of numbers
+     * @return integer - Sum of all numbers.
+     */
     private static int getSum(List<Integer> currentList) {
-        
+
         return currentList.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
     }
 
+    /**
+     * This function calculates the factorial of a given number. Dynamic Programming.
+     * @param number - number for which the factorial is to be calculated.
+     * @return integer - factorial of a number.
+     */
     private static long factorial(int number) {
         if (number == 0 || number == 1) {
             return 1;
@@ -126,7 +161,12 @@ public class TimeSeriesSequences {
         return factorial;
     }
 
-
+    /**
+     * This function calculates the nChooseK.
+     * @param n - n
+     * @param k - k
+     * @return integer - nChooseK.
+     */
     private static long nChooseK(int n, int k) {
         if (k == 1) {
             return n;
