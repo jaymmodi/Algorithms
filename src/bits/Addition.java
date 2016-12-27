@@ -1,42 +1,24 @@
 package bits;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Addition {
+
     public static void main(String[] args) {
-        int a = 5;
-//        int b = a ^ 5;
+        int a = 1;
+        int b = 2;
 
-//        System.out.println(b);
-        System.out.println(getBinary(a));
+        System.out.println(sum(a, b));
     }
 
-    private static String getBinary(int number) {
-        List<Integer> remainders = new ArrayList<>();
-
-        while (number > 0) {
-            int quotient = number / 2;
-            int remainder = number % 2;
-
-            if (remainder == 0) {
-                remainders.add(0);
-            } else {
-                remainders.add(1);
-            }
-
-            number = quotient;
+    private static int sum(int a, int b) {
+        if (b == 0) {
+            return a;
         }
 
-        return getString(remainders);
+        int sumWithoutCarry = a ^ b;
+        int actualCarryGeneratedPosition = a & b;
+        int addCarryPosition = actualCarryGeneratedPosition << 1;
+
+        return sum(sumWithoutCarry, addCarryPosition);
     }
 
-    private static String getString(List<Integer> remainders) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = remainders.size() - 1; i >= 0; i--) {
-            stringBuilder.append(remainders.get(i));
-        }
-        
-        return stringBuilder.toString();
-    }
 }
