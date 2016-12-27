@@ -7,11 +7,10 @@ public class FindDuplicatesWithinK {
 
     public static void main(String[] args) {
         int array[] = {1, 2, 4, 4, 5};
-        System.out.println(findDuplicates(array, 3));
+        System.out.println(findDuplicates(array));
     }
 
-    private static boolean findDuplicates(int[] array, int distance) {
-        int index = 0;
+    private static boolean findDuplicates(int[] array) {
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < array.length; i++) {
             if (map.containsKey(array[i])) {
@@ -22,7 +21,6 @@ public class FindDuplicatesWithinK {
                 }
             } else {
                 map.put(array[i], i);
-                index++;
             }
         }
         return false;
