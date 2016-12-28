@@ -13,38 +13,36 @@ public class RemoveNthFromLast {
         Node head = createList(asList(1, 2, 3, 5, 8, 9, 100));
         printList(head);
 
-
-        head = removeNthFromLast(head, 2);
+        head = removeNthFromLast(head, 1);
         printList(head);
     }
 
     private static Node removeNthFromLast(Node head, int number) {
         Node fastPointer = head;
         Node slowPointer = head;
-        Node previousToSlowPointer = head;
+        Node previousToSlowPointer = null;
 
-        int fastCount = 0;
-        int slowCount = 0;
+        int fastCount = 1; // start at 1.
+        int slowCount = 1;
 
         while (fastPointer.next != null) {
-            if (fastCount - slowCount == number) {
+            fastPointer = fastPointer.next;
+            fastCount++;
+
+            if (fastCount - slowCount > number - 1) {   // keep the difference as n - 1
                 slowCount++;
                 previousToSlowPointer = slowPointer;
                 slowPointer = slowPointer.next;
             }
-
-            fastCount++;
-            fastPointer = fastPointer.next;
         }
 
-        if ((fastCount - slowCount == number)) {
-            previousToSlowPointer = slowPointer;
-            slowPointer = slowPointer.next;
+        if (previousToSlowPointer != null) {
+            previousToSlowPointer.next = slowPointer.next; // remove nth element
+        } else {
+            return head.next;
         }
 
-        previousToSlowPointer.next = slowPointer.next;
         slowPointer.next = null;
-
         return head;
     }
 
