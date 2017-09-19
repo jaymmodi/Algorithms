@@ -6,7 +6,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class WordSearch {
+public class WordSearch2Solution1 {
 
     public static void main(String[] args) {
 //        char[][] board = {
@@ -23,8 +23,8 @@ public class WordSearch {
         };
 
         List<String> words = asList("eaabcdgfa");
-        WordSearch wordSearch = new WordSearch();
-        List<String> words1 = wordSearch.findWords(board, words);
+        WordSearch2Solution1 wordSearch2Solution1 = new WordSearch2Solution1();
+        List<String> words1 = wordSearch2Solution1.findWords(board, words);
 
         for (String s : words1) {
             System.out.println(s);
