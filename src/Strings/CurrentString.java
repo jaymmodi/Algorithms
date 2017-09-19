@@ -11,13 +11,7 @@ public class CurrentString {
         this.str = str;
         this.lastRowIndex = lastRowIndex;
         this.lastColumnIndex = lastColumnIndex;
-
-        this.visited = new boolean[visited.length][visited[0].length];
-        for (int i = 0; i < visited.length; i++) {
-            for (int j = 0; j < visited[0].length; j++) {
-                this.visited[i][j] = visited[i][j];
-            }
-        }
+        this.visited = visited;
     }
 
 }
