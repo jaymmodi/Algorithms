@@ -25,7 +25,6 @@ public class Trie {
         }
 
         node.endOfWord = true;
-
     }
 
     public boolean search(String word) {
