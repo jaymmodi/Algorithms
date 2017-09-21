@@ -33,44 +33,37 @@ public class TrieRegexSearch {
     }
 
     public boolean search(String word) {
-        return search(root, word);
+        return word.length() != 0 && search(root, word, 0);
     }
 
-    private boolean search(TrieNodeRegex root, String word) {
+    private boolean search(TrieNodeRegex root, String word, int position) {
+        if (position == word.length()) {
+            return root.endOfWord;
+        }
+
         char dot = '.';
-        char[] chars = word.toCharArray();
+        char currentChar = word.charAt(position);
 
-        if (word.length() == 0) {
-            return false;
-        }
+        if (currentChar == dot) {
+            List<TrieNodeRegex> childNodes = root.children.get(currentChar);
 
-        if (chars.length == 1 && chars[0] == dot) {
-            return true;
-        }
+            if (childNodes == null) {
+                return false;
+            }
 
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] == dot) {
-                List<TrieNodeRegex> childNodes = root.children.get(chars[i]);
-
-                boolean found = false;
-                for (TrieNodeRegex childNode : childNodes) {
-                    found = found || search(childNode, word.substring(i + 1));
-                }
-                return found;
+            boolean found = false;
+            ++position;
+            for (TrieNodeRegex childNode : childNodes) {
+                found = found || search(childNode, word, position);
+            }
+            return found;
+        } else {
+            if (root.children.containsKey(currentChar)) {
+                return search(root.children.get(currentChar).get(0), word, ++position);
             } else {
-                if (root.children.containsKey(chars[i])) {
-                    TrieNodeRegex childNode = root.children.get(chars[i]).get(0);
-                    if (word.substring(i + 1).equals("")) {
-                        return childNode.endOfWord;
-                    }
-
-                    return search(childNode, word.substring(i + 1));
-                } else {
-                    return false;
-                }
+                return false;
             }
         }
-        return false;
     }
 
     private void updateRegexCharacter(TrieNodeRegex parentTrieNode, TrieNodeRegex childTrieNode) {
@@ -89,12 +82,14 @@ public class TrieRegexSearch {
     public static void main(String[] args) {
         TrieRegexSearch trieRegexSearch = new TrieRegexSearch();
 
-        trieRegexSearch.addWord("jay");
-        trieRegexSearch.addWord("modi");
+        trieRegexSearch.addWord("at");
+        trieRegexSearch.addWord("and");
+        trieRegexSearch.addWord("an");
+        trieRegexSearch.addWord("add");
+        trieRegexSearch.addWord("bat");
+        trieRegexSearch.addWord("a");
 
-        System.out.println(trieRegexSearch.search(".od."));
-        System.out.println(trieRegexSearch.search(".a."));
-        System.out.println(trieRegexSearch.search("....."));
+        System.out.println(trieRegexSearch.search("."));
 
     }
 }
