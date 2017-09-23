@@ -3,7 +3,7 @@ package Recursion.Backtracking;
 public class Permutation {
 
     public static void main(String[] args) {
-        String str = "ab";
+        String str = "jay";
 
         permute(str);
     }
