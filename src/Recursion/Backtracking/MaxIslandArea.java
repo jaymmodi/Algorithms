@@ -12,11 +12,6 @@ public class MaxIslandArea {
                 {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
 
-
-//        int[][] grid = {{0, 0, 0},
-//                {0, 1, 1},
-//                {0, 1, 0}};
-
         System.out.println(maxAreaOfIsland(grid));
     }
 
@@ -31,11 +26,12 @@ public class MaxIslandArea {
 
         int max = 0;
 
+        boolean[][] visited = new boolean[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
 
                 if (grid[i][j] == 1) {
-                    int area = dfs(grid, i, j, rows, cols, 0);
+                    int area = dfs(grid, i, j, rows, cols, 0, visited);
 
                     max = Math.max(area, max);
                 }
@@ -45,18 +41,18 @@ public class MaxIslandArea {
         return max;
     }
 
-    private static int dfs(int[][] grid, int rowIndex, int colIndex, int rows, int cols, int area) {
-        if (rowIndex < 0 || colIndex < 0 || rowIndex >= rows || colIndex >= cols || grid[rowIndex][colIndex] == 0) {
+    private static int dfs(int[][] grid, int rowIndex, int colIndex, int rows, int cols, int area, boolean[][] visited) {
+        if (rowIndex < 0 || colIndex < 0 || rowIndex >= rows || colIndex >= cols || grid[rowIndex][colIndex] == 0 || visited[rowIndex][colIndex]) {
             return area;
         }
 
-        grid[rowIndex][colIndex] = 0;
+        visited[rowIndex][colIndex] = true;
         area++;
 
-        area = dfs(grid, rowIndex, colIndex + 1, rows, cols, area); // go right
-        area = dfs(grid, rowIndex, colIndex - 1, rows, cols, area); // go left
-        area = dfs(grid, rowIndex + 1, colIndex, rows, cols, area); // go down
-        area = dfs(grid, rowIndex - 1, colIndex, rows, cols, area); // go up
+        area = dfs(grid, rowIndex, colIndex + 1, rows, cols, area, visited); // go right
+        area = dfs(grid, rowIndex, colIndex - 1, rows, cols, area, visited); // go left
+        area = dfs(grid, rowIndex + 1, colIndex, rows, cols, area, visited); // go down
+        area = dfs(grid, rowIndex - 1, colIndex, rows, cols, area, visited); // go up
 
         return area;
     }
