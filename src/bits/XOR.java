@@ -11,7 +11,7 @@ public class XOR {
     }
 
     private static int singleNumber(int[] array) {
-        return Arrays.stream(array).reduce(0, (x, y) -> x ^ y);
+        return Arrays.stream(array).parallel().reduce(0, (x, y) -> x ^ y);
     }
 
 }
