@@ -10,13 +10,13 @@ public class TwoSumBST {
         TreeNode left = new TreeNode(3);
         TreeNode right = new TreeNode(6);
 
-        left.setLeft(new TreeNode(2));
-        left.setRight(new TreeNode(4));
+        left.left = (new TreeNode(2));
+        left.right = (new TreeNode(4));
 
-        right.setRight(new TreeNode(7));
+        right.right = (new TreeNode(7));
 
-        root.setRight(right);
-        root.setLeft(left);
+        root.right = (right);
+        root.left = (left);
 
         System.out.println(findTarget(root, 9));
     }
@@ -50,8 +50,8 @@ public class TwoSumBST {
             return;
         }
 
-        inOrder(root.getLeft(), numbers);
-        numbers.add(root.getVal());
-        inOrder(root.getRight(), numbers);
+        inOrder(root.left, numbers);
+        numbers.add(root.val);
+        inOrder(root.right, numbers);
     }
 }
