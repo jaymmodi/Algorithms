@@ -5,13 +5,15 @@ import java.util.List;
 
 public class PrintAllPaths {
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(3);
-        TreeNode left = new TreeNode(5);
-        TreeNode right = new TreeNode(6);
+        TreeNode root = new TreeNode(1);
+        TreeNode left = new TreeNode(2);
+        TreeNode right = new TreeNode(3);
 
-        left.right = new TreeNode(4);
+        left.left = new TreeNode(4);
 
-        right.right = new TreeNode(3);
+        right.left = new TreeNode(2);
+        right.left.left = new TreeNode(4);
+        right.right = new TreeNode(4);
 
         root.right = right;
         root.left = left;
