@@ -7,7 +7,7 @@ import java.util.List;
 public class PermuteDuplicateNumbers {
 
     public static void main(String[] args) {
-        List<List<Integer>> permute = permute(new int[]{1, 1, 2});
+        List<List<Integer>> permute = permute(new int[]{1, 1, 2, 2});
 
         permute.forEach(System.out::println);
     }
@@ -17,19 +17,8 @@ public class PermuteDuplicateNumbers {
         List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);
 
-        for (int i = 0; i < nums.length; i++) {
-            if (i > 0 && nums[i] == nums[i - 1]) {
-                continue;
-            }
-            List<Integer> tempList = new ArrayList<>();
-            visited[i] = true;
-            tempList.add(nums[i]);
-
-            permuteHelper(nums, visited, tempList, result);
-
-            visited[i] = false;
-            tempList.remove(tempList.size() - 1);
-        }
+        List<Integer> tempList = new ArrayList<>();
+        permuteHelper(nums, visited, tempList, result);
 
         return result;
     }
@@ -38,10 +27,8 @@ public class PermuteDuplicateNumbers {
         if (tempList.size() == nums.length) {
             result.add(new ArrayList<>(tempList));
         } else {
-
             for (int i = 0; i < nums.length; i++) {
-                if (i > 0 && nums[i] == nums[i - 1] && !visited[i-1]) {
-                    visited[i] = true;
+                if (i > 0 && nums[i] == nums[i - 1] && visited[i - 1]) {
                     continue;
                 }
                 if (!visited[i]) {
