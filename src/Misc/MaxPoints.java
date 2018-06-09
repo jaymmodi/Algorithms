@@ -1,5 +1,6 @@
 package Misc;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.Map;
 public class MaxPoints {
 
     public static void main(String[] args) {
-
         Point[] points1 = {
                 new Point(1, 1),
                 new Point(3, 2),
@@ -94,13 +94,13 @@ public class MaxPoints {
 
     }
 
-
     public static int maxPoints(Point[] points) {
+        System.out.println(points.length);
         if (points.length <= 2) {
             return points.length;
         }
 
-        Map<Double, List<List<Point>>> slopeMap = new HashMap<>();
+        Map<BigDecimal, List<List<Point>>> slopeMap = new HashMap<>();
         Map<Integer, Map<Integer, Integer>> pointsCount = new HashMap<>();
         List<Point> maxLine = null;
         int max = Integer.MIN_VALUE;
@@ -131,14 +131,14 @@ public class MaxPoints {
                 Point point2 = points[j];
 
                 if (!isEqual(point1, point2)) {
-                    double slope = slope(point1, point2);
+                    BigDecimal slope = slope(point1, point2);
 
                     if (slopeMap.containsKey(slope)) {
                         boolean newLineFlag = true;
                         List<List<Point>> lines = slopeMap.get(slope);
 
                         for (List<Point> line : lines) {
-                            if (slope(line.get(0), point2) == slope && !hasPoint(line, point2)) {
+                            if (!hasPoint(line, point2) && slope(line.get(0), point2).equals(slope)) {
                                 line.add(point2);
                                 newLineFlag = false;
 
@@ -195,14 +195,14 @@ public class MaxPoints {
         return point1.x == point2.x && point1.y == point2.y;
     }
 
-    private static double slope(Point point1, Point point2) {
+    private static BigDecimal slope(Point point1, Point point2) {
         double slope = (point2.y - point1.y) / (double) (point2.x - point1.x);
 
         if (Double.isInfinite(slope)) {
-            return Double.POSITIVE_INFINITY;
+            return BigDecimal.valueOf(Double.MAX_VALUE);
         }
 
-        return slope == -0.0 ? 0.0 : slope;
+        return ((slope == -0.0) || (slope == 0.0)) ? BigDecimal.ZERO : BigDecimal.valueOf(slope);
     }
 
     private static boolean hasPoint(List<Point> points, Point point) {
