@@ -24,7 +24,24 @@ public class MaxPoints {
                 new Point(3, 3),
                 new Point(4, 4),
                 new Point(2, 3),
-                new Point(3, 4)
+                new Point(3, 4),
+                new Point(3, 4),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6),
+                new Point(6, 6)
         };
 
         Point[] points3 = {
@@ -59,6 +76,12 @@ public class MaxPoints {
                 new Point(0, 0)
         };
 
+        Point[] points8 = {
+                new Point(0, 0),
+                new Point(0, 0),
+                new Point(1, 1)
+        };
+
 
         System.out.println(maxPoints(points1));
         System.out.println(maxPoints(points2));
@@ -67,6 +90,7 @@ public class MaxPoints {
         System.out.println(maxPoints(points5));
         System.out.println(maxPoints(points6));
         System.out.println(maxPoints(points7));
+        System.out.println(maxPoints(points8));
 
     }
 
@@ -106,47 +130,50 @@ public class MaxPoints {
                 Point point1 = points[i];
                 Point point2 = points[j];
 
-                double slope = slope(point1, point2);
-                if (slopeMap.containsKey(slope) && !isEqual(point1, point2)) {
-                    boolean newLineFlag = true;
-                    List<List<Point>> lines = slopeMap.get(slope);
+                if (!isEqual(point1, point2)) {
+                    double slope = slope(point1, point2);
 
-                    for (List<Point> line : lines) {
-                        if (slope(line.get(0), point2) == slope && !line.contains(point2) && !hasPoint(line,point2)) {
-                            line.add(point2);
-                            newLineFlag = false;
+                    if (slopeMap.containsKey(slope)) {
+                        boolean newLineFlag = true;
+                        List<List<Point>> lines = slopeMap.get(slope);
 
-                            if (line.size() > max) {
-                                max = line.size();
-                                maxLine = line;
+                        for (List<Point> line : lines) {
+                            if (slope(line.get(0), point2) == slope && !hasPoint(line, point2)) {
+                                line.add(point2);
+                                newLineFlag = false;
+
+                                if (line.size() > max) {
+                                    max = line.size();
+                                    maxLine = line;
+                                }
+                            } else if (!hasPoint(line, point1) && !hasPoint(line, point2)) {
+                                newLineFlag = true;
                             }
                         }
-                    }
 
-                    if (newLineFlag) {
-                        List<Point> newLine = new ArrayList<>();
-                        newLine.add(point1);
-                        newLine.add(point2);
+                        if (newLineFlag) {
+                            List<Point> newLine = new ArrayList<>();
+                            newLine.add(point1);
+                            newLine.add(point2);
 
-                        lines.add(newLine);
-                    }
+                            lines.add(newLine);
+                        }
 
-                } else if (!isEqual(point1, point2)) {
+                    } else {
+                        List<Point> firstLine = new ArrayList<>();
+                        firstLine.add(point1);
+                        firstLine.add(point2);
 
-                    List<Point> newLine = new ArrayList<>();
-                    newLine.add(point1);
-                    newLine.add(point2);
+                        List<List<Point>> lines = new ArrayList<>();
+                        lines.add(firstLine);
+                        slopeMap.put(slope, lines);
 
-                    List<List<Point>> line = new ArrayList<>();
-                    line.add(newLine);
-                    slopeMap.put(slope, line);
-
-                    if (max == Integer.MIN_VALUE) {
-                        max = 2;
-                        maxLine = newLine;
+                        if (max == Integer.MIN_VALUE) {
+                            max = 2;
+                            maxLine = firstLine;
+                        }
                     }
                 }
-
             }
         }
 
