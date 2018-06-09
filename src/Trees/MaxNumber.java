@@ -7,8 +7,8 @@ public class MaxNumber {
 
     public static void main(String[] args) {
         TreeNode root = SampleTree.getBinaryTree();
-
         System.out.println(maxNodeValue(root));
+
         System.out.println(maxNodeValueNonRecursive(root));
     }
 
