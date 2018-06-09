@@ -1,7 +1,5 @@
 package Arrays;
 
-import java.util.Arrays;
-
 public class CanPlaceFlowers {
     public static void main(String[] args) {
         int flowerbed[] = {1, 0, 0, 0, 0};
@@ -105,7 +103,13 @@ public class CanPlaceFlowers {
     }
 
     private static int getOnes(int[] flowerbed) {
-        return (int) Arrays.stream(flowerbed).filter(i -> i == 1).count();
+        long count = 0L;
+        for (int i : flowerbed) {
+            if (i == 1) {
+                count++;
+            }
+        }
+        return (int) count;
     }
 
     private static boolean inRange(int index, int end) {
