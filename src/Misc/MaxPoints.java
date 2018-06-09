@@ -95,7 +95,6 @@ public class MaxPoints {
     }
 
     public static int maxPoints(Point[] points) {
-        System.out.println(points.length);
         if (points.length <= 2) {
             return points.length;
         }
