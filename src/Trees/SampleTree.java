@@ -9,7 +9,11 @@ public class SampleTree {
 
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
-        root.left.right.right = new TreeNode(100);
+
+        root.right.left = new TreeNode(100);
+        root.right.left.left = new TreeNode(100);
+        root.right.left.right = new TreeNode(2);
+        root.right.left.right.left = new TreeNode(100);
 
         return root;
     }
