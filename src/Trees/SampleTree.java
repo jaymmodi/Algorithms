@@ -8,7 +8,7 @@ public class SampleTree {
                       1
                2               3
            4      5        100   null
-                        100    2
+            197         100    2
                             100  null
         
          */
@@ -21,6 +21,8 @@ public class SampleTree {
 
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
+
+        root.left.left.right = new TreeNode(197);
 
         root.right.left = new TreeNode(100);
 
