@@ -32,8 +32,7 @@ public class ClimbStairs {
             return memory[n];
         }
 
-        int result = climbStairsHelper(n - 1, memory) + climbStairsHelper(n - 2, memory);
-        memory[n] = result;
+        memory[n] = climbStairsHelper(n - 1, memory) + climbStairsHelper(n - 2, memory);
         return memory[n];
     }
 }
