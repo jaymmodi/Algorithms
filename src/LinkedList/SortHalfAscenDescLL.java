@@ -4,13 +4,13 @@ package LinkedList;
 public class SortHalfAscenDescLL {
 
     public static void main(String[] args) {
-        Node head = new Node(10);
-        head.next = new Node(40);
-        head.next.next = new Node(53);
-        head.next.next.next = new Node(30);
-        head.next.next.next.next = new Node(67);
-        head.next.next.next.next.next = new Node(12);
-        head.next.next.next.next.next.next = new Node(89);
+        ListNode head = new ListNode(10);
+        head.next = new ListNode(40);
+        head.next.next = new ListNode(53);
+        head.next.next.next = new ListNode(30);
+        head.next.next.next.next = new ListNode(67);
+        head.next.next.next.next.next = new ListNode(12);
+        head.next.next.next.next.next.next = new ListNode(89);
 
         printList(head);
 
@@ -18,8 +18,8 @@ public class SortHalfAscenDescLL {
 
     }
 
-    private static void sortList(Node head) {
-        Node[] ascdesList = createAscDesc(head);
+    private static void sortList(ListNode head) {
+        ListNode[] ascdesList = createAscDesc(head);
 
         ascdesList[1] = reverseList(ascdesList[1]);
 
@@ -28,23 +28,23 @@ public class SortHalfAscenDescLL {
         printList(head);
     }
 
-    private static Node mergeList(Node listOne, Node listTwo) {
-        Node head;
-        Node temp = null;
-        if (listOne.getData() < listTwo.getData()) {
+    private static ListNode mergeList(ListNode listOne, ListNode listTwo) {
+        ListNode head;
+        ListNode temp = null;
+        if (listOne.getVal() < listTwo.getVal()) {
             head = listOne;
         } else {
             head = listTwo;
         }
 
-        while (listOne != null && listOne.getData() <= listTwo.getData()) {
+        while (listOne != null && listOne.getVal() <= listTwo.getVal()) {
             temp = listOne;
             listOne = listOne.getNext();
         }
         if (temp != null) {
             temp.setNext(listTwo);
         }
-        while (listTwo != null && listTwo.getData() < listOne.getData()) {
+        while (listTwo != null && listTwo.getVal() < listOne.getVal()) {
             temp = listTwo;
             listTwo = listTwo.getNext();
         }
@@ -55,13 +55,13 @@ public class SortHalfAscenDescLL {
         return head;
     }
 
-    private static Node reverseList(Node head) {
+    private static ListNode reverseList(ListNode head) {
 
-        Node prev = null;
-        Node temp = head;
+        ListNode prev = null;
+        ListNode temp = head;
 
         while (temp != null) {
-            Node ahead = temp.getNext();
+            ListNode ahead = temp.getNext();
             temp.setNext(prev);
             prev = temp;
             temp = ahead;
@@ -73,16 +73,16 @@ public class SortHalfAscenDescLL {
     }
 
 
-    private static Node[] createAscDesc(Node head) {
+    private static ListNode[] createAscDesc(ListNode head) {
 
         if (head == null) {
             return null;
         } else {
-            Node asc = head;
-            Node desc = head.getNext();
+            ListNode asc = head;
+            ListNode desc = head.getNext();
 
-            Node tempOne = asc;
-            Node tempTwo = desc;
+            ListNode tempOne = asc;
+            ListNode tempTwo = desc;
 
             while (tempOne != null && tempTwo != null) {
                 tempOne.setNext(tempTwo.getNext());
@@ -91,17 +91,17 @@ public class SortHalfAscenDescLL {
                 tempTwo = tempTwo.getNext();
             }
 
-            return new Node[]{asc, desc};
+            return new ListNode[]{asc, desc};
         }
 
     }
 
-    private static void printList(Node head) {
+    private static void printList(ListNode head) {
         if (head == null) {
             System.out.println("Error");
         } else {
             while (head != null) {
-                System.out.print(head.getData() + " ");
+                System.out.print(head.getVal() + " ");
                 head = head.getNext();
             }
             System.out.println("");

@@ -1,7 +1,7 @@
 package LinkedList;
 
-import java.util.List;
-
+import static LinkedList.SampleLinkedList.createList;
+import static LinkedList.SampleLinkedList.printList;
 import static java.util.Arrays.asList;
 
 /***
@@ -10,17 +10,17 @@ import static java.util.Arrays.asList;
 public class RemoveNthFromLast {
 
     public static void main(String[] args) {
-        Node head = createList(asList(1, 2, 3, 5, 8, 9, 100));
+        ListNode head = createList(asList(1, 2, 3, 5, 8, 9, 100));
         printList(head);
 
         head = removeNthFromLast(head, 1);
         printList(head);
     }
 
-    private static Node removeNthFromLast(Node head, int number) {
-        Node fastPointer = head;
-        Node slowPointer = head;
-        Node previousToSlowPointer = null;
+    private static ListNode removeNthFromLast(ListNode head, int number) {
+        ListNode fastPointer = head;
+        ListNode slowPointer = head;
+        ListNode previousToSlowPointer = null;
 
         int fastCount = 1; // start at 1.
         int slowCount = 1;
@@ -44,40 +44,6 @@ public class RemoveNthFromLast {
 
         slowPointer.next = null;
         return head;
-    }
-
-    private static void printList(Node head) {
-        if (head == null) {
-            System.out.println("Error");
-        } else {
-            while (head != null) {
-                System.out.print(head.getData() + " ");
-                head = head.getNext();
-            }
-            System.out.println("");
-        }
-    }
-
-    private static Node createList(List<Integer> integers) {
-        Node head = null;
-        for (Integer integer : integers) {
-            head = addInLinkedList(head, integer);
-        }
-        return head;
-    }
-
-    private static Node addInLinkedList(Node head, Integer integer) {
-
-        if (head == null) {
-            return new Node(integer);
-        }
-        Node first = head;
-        while (head.next != null) {
-            head = head.next;
-        }
-
-        head.next = new Node(integer);
-        return first;
     }
 
 }
