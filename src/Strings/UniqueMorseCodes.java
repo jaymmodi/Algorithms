@@ -4,11 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UniqueMorseCodes {
-    public static final String[] codes = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
+    private static final String[] codes = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
 
     public static void main(String[] args) {
         String[] words = {"gin", "zen", "gig", "msg"};
-//        String[] words = {"abc"};
 
         System.out.println(uniqueMorseRepresentations(words));
     }
