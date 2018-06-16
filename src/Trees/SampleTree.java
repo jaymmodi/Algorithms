@@ -89,9 +89,6 @@ public class SampleTree {
             3       6
          2     4       7
 
-
-
-
          */
 
         TreeNode root = new TreeNode(5);
