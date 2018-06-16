@@ -14,18 +14,18 @@ public class RepeatedStringMatch {
         }
 
         int repeat = 1;
-        String newString = A;
+        StringBuilder newString = new StringBuilder(A);
         while (newString.length() < B.length()) {
-            newString = newString + A;
+            newString.append(A);
             repeat++;
         }
 
-        if (newString.contains(B)) {
+        if (newString.toString().contains(B)) {
             return repeat;
         } else {
-            newString = newString + A;
+            newString.append(A);
             repeat++;
-            return newString.contains(B) ? repeat : -1;
+            return newString.toString().contains(B) ? repeat : -1;
         }
     }
 }
