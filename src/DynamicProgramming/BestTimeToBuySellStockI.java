@@ -8,6 +8,12 @@ public class BestTimeToBuySellStockI {
         int prices4[] = {2, 6, 5, 0, 3};
         int prices5[] = {1, 7, 4, 2};
 
+        System.out.println(maxProfitSlower(prices1));
+        System.out.println(maxProfitSlower(prices2));
+        System.out.println(maxProfitSlower(prices3));
+        System.out.println(maxProfitSlower(prices4));
+        System.out.println(maxProfitSlower(prices5));
+
         System.out.println(maxProfit(prices1));
         System.out.println(maxProfit(prices2));
         System.out.println(maxProfit(prices3));
@@ -15,7 +21,7 @@ public class BestTimeToBuySellStockI {
         System.out.println(maxProfit(prices5));
     }
 
-    public static int maxProfit(int[] prices) {
+    public static int maxProfitSlower(int[] prices) {
         int profit = 0;
         for (int buyingIndex = 0; buyingIndex <= prices.length - 2; buyingIndex++) {
             for (int sellingIndex = buyingIndex + 1; sellingIndex <= prices.length - 1; sellingIndex++) {
@@ -26,5 +32,20 @@ public class BestTimeToBuySellStockI {
         }
 
         return profit;
+    }
+
+    public static int maxProfit(int[] prices) {
+        int max = 0;
+        int minBuyingPrice = prices[0];
+
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < minBuyingPrice) {
+                minBuyingPrice = prices[i];
+            } else {
+                max = Math.max(max, prices[i] - minBuyingPrice);
+            }
+        }
+
+        return max;
     }
 }
