@@ -16,16 +16,25 @@ public class BestTimeToBuySellStock {
     }
 
     public static int maxProfit(int[] prices) {
-        return maxProfitHelper(prices, 0);
+        int profitMemory[] = new int[prices.length];
+        return maxProfitHelper(prices, 0, profitMemory);
     }
 
-    private static int maxProfitHelper(int[] prices, int start) {
+    private static int maxProfitHelper(int[] prices, int start, int[] profitMemory) {
         if (start >= prices.length - 1) {
+            if (start == prices.length - 1)
+                profitMemory[start] = 0;
+
             return 0;
         }
 
         if (start == prices.length - 2) {
-            return prices[start + 1] > prices[start] ? prices[start + 1] - prices[start] : 0;
+            profitMemory[start] = prices[start + 1] > prices[start] ? prices[start + 1] - prices[start] : 0;
+            return profitMemory[start];
+        }
+
+        if (profitMemory[start] != 0) {
+            return profitMemory[start];
         }
 
         int profit = 0;
@@ -33,10 +42,11 @@ public class BestTimeToBuySellStock {
             for (int sellingIndex = buyingIndex + 1; sellingIndex < prices.length; sellingIndex++) {
                 int currentProfit = prices[sellingIndex] - prices[buyingIndex];
 
-                profit = Math.max(profit, currentProfit + maxProfitHelper(prices, sellingIndex + 1));
+                profit = Math.max(profit, currentProfit + maxProfitHelper(prices, sellingIndex + 1, profitMemory));
             }
         }
 
-        return profit < 0 ? 0 : profit;
+        profitMemory[start] = profit < 0 ? 0 : profit;
+        return profitMemory[start];
     }
 }
