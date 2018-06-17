@@ -13,11 +13,27 @@ public class BestTimeToBuySellStock {
         System.out.println(maxProfit(prices3));
         System.out.println(maxProfit(prices4));
         System.out.println(maxProfit(prices5));
+
+        
+        System.out.println(maxProfitLinear(prices1));
+        System.out.println(maxProfitLinear(prices2));
+        System.out.println(maxProfitLinear(prices3));
+        System.out.println(maxProfitLinear(prices4));
+        System.out.println(maxProfitLinear(prices5));
     }
 
     public static int maxProfit(int[] prices) {
         int profitMemory[] = new int[prices.length];
         return maxProfitHelper(prices, 0, profitMemory);
+    }
+
+    public static int maxProfitLinear(int[] prices) {
+        int total = 0;
+        for (int i = 0; i < prices.length - 1; i++) {
+            if (prices[i + 1] > prices[i]) total += prices[i + 1] - prices[i];
+        }
+
+        return total;
     }
 
     private static int maxProfitHelper(int[] prices, int start, int[] profitMemory) {
