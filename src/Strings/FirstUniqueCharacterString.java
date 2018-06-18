@@ -19,10 +19,10 @@ public class FirstUniqueCharacterString {
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
 
-            if (chars[c] == -1) {
-                chars[c] = i;
-            } else if (chars[c] >= 0) {
-                chars[c] = Integer.MAX_VALUE;
+            if (chars[c - 'a'] == -1) {
+                chars[c - 'a'] = i;
+            } else if (chars[c - 'a'] >= 0) {
+                chars[c - 'a'] = Integer.MAX_VALUE;
             }
         }
 
