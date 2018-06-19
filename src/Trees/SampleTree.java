@@ -102,4 +102,14 @@ public class SampleTree {
 
         return root;
     }
+
+    public static TreeNode getBinaryTree2() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+
+        root.left.right = new TreeNode(4);
+
+        return root;
+    }
 }
