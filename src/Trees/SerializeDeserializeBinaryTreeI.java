@@ -3,11 +3,11 @@ package Trees;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Codec {
+public class SerializeDeserializeBinaryTreeI {
     public static void main(String[] args) {
         TreeNode node = SampleTree.getBinaryTree2();
 
-        Codec codec = new Codec();
+        SerializeDeserializeBinaryTreeI codec = new SerializeDeserializeBinaryTreeI();
         String serialize = codec.serialize(node);
         System.out.println("serialize = " + serialize);
 
