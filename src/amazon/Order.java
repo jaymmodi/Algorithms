@@ -23,9 +23,9 @@ public class Order {
                 .collect(Collectors.toList());
 
 
-        List<String> collect = customComparator(allWordsLines);
+        List<String> lowercaseAfterSort = customComparator(allWordsLines);
 
-        result.addAll(collect);
+        result.addAll(lowercaseAfterSort);
         result.addAll(allNumbersLines);
 
         return result;
@@ -33,25 +33,25 @@ public class Order {
 
     private static List<String> customComparator(List<String> allWordsLines) {
         return allWordsLines.stream().sorted((s1, s2) -> {
-            String[] s1Array = s1.split(" ");
-            String[] s2Array = s2.split(" ");
-            StringBuilder formattedStr1 = new StringBuilder();
-            StringBuilder formattedStr2 = new StringBuilder();
+            String[] split1 = s1.split(" ");
+            String[] split2 = s2.split(" ");
+            StringBuilder sb1 = new StringBuilder();
+            StringBuilder sb2 = new StringBuilder();
 
-            for (int i = 1; i < s1Array.length; i++) {
-                formattedStr1.append(s1Array[i]).append(" ");
+            for (int i = 1; i < split1.length; i++) {
+                sb1.append(split1[i]).append(" ");
             }
 
-            for (int i = 1; i < s2Array.length; i++) {
-                formattedStr2.append(s2Array[i]).append(" ");
+            for (int i = 1; i < split2.length; i++) {
+                sb2.append(split2[i]).append(" ");
             }
 
-            if (formattedStr1.toString().equals(formattedStr2.toString())) {
-                formattedStr1.append(s1Array[0]);
-                formattedStr2.append(s2Array[0]);
+            if (sb1.toString().equals(sb2.toString())) {
+                sb1.append(split1[0]);
+                sb2.append(split2[0]);
             }
 
-            return formattedStr1.toString().trim().compareTo(formattedStr2.toString().trim());
+            return sb1.toString().trim().compareTo(sb2.toString().trim());
 
         }).collect(Collectors.toList());
     }

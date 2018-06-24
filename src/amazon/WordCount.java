@@ -5,30 +5,38 @@ import java.util.*;
 public class WordCount {
 
     public static void main(String[] args) {
+        wordMap("fast fastest faster", Arrays.asList("fa")).forEach(System.out::println);
+        System.out.println("****");
         wordMap("fast fastest faster fast", Arrays.asList("fa")).forEach(System.out::println);
+        System.out.println("****");
+        wordMap("fast", Arrays.asList("fa")).forEach(System.out::println);
+        System.out.println("****");
+        wordMap("", Arrays.asList("fa")).forEach(System.out::println);
+        System.out.println("****");
+        wordMap(" ", Arrays.asList("fa")).forEach(System.out::println);
+        System.out.println("****");
+        wordMap("jack and jill went to the market to buy bread and cheese and cheese is jack favourite food", Arrays.asList("and", "he", "the", "to", "is")).forEach(System.out::println);
+        System.out.println("****");
     }
 
-    public static List<String> wordMap(String litreatureText, List<String> wordsToExclude) {
-        Map<String, Integer> wordCount = new HashMap<>();
-
-        litreatureText = removePunctuation(litreatureText);
-        String[] split = litreatureText.split(" ");
-
-        List<String> excludedWords = new ArrayList<>();
-        for (String wordToExclude : wordsToExclude) {
-            excludedWords.add(wordToExclude.toLowerCase());
+    public static List<String> wordMap(String literatureText, List<String> wordsToExclude) {
+        if (literatureText.trim().isEmpty()) {
+            return new ArrayList<>();
         }
 
-        int max = Integer.MIN_VALUE;
+        if (literatureText.split(" ").length == 1) {
+            return Collections.singletonList(literatureText);
+        }
+
+        Map<String, Integer> wordCount = new HashMap<>();
+
+        int max = 1;
+        String[] split = literatureText.split(" ");
         for (String word : split) {
-            max = insertInMap(excludedWords, wordCount, max, word);
+            max = insertInMap(wordsToExclude, wordCount, max, word);
         }
 
         return getMostFrequentWords(wordCount, max);
-    }
-
-    private static String removePunctuation(String litreatureText) {
-        return litreatureText.replaceAll("\\p{Punct}", " ").toLowerCase();
     }
 
     private static List<String> getMostFrequentWords(Map<String, Integer> wordCount, int max) {
