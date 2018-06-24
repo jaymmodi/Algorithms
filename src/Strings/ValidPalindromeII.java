@@ -16,20 +16,24 @@ public class ValidPalindromeII {
     }
 
     public static boolean validPalindrome(String s) {
-        int l = 0, r = s.length() - 1;
-        while (l < r) {
-            if (s.charAt(l) != s.charAt(r)) return isPalindromic(s, l, r - 1) || isPalindromic(s, l + 1, r);
-            l++;
-            r--;
+        int start = 0, end = s.length() - 1;
+        while (start < end) {
+            if (s.charAt(start) != s.charAt(end)) {
+                return isPalindromic(s, start, end - 1) || isPalindromic(s, start + 1, end);
+            }
+            start++;
+            end--;
         }
         return true;
     }
 
-    private static boolean isPalindromic(String s, int l, int r) {
-        while (l < r) {
-            if (s.charAt(l) != s.charAt(r)) return false;
-            l++;
-            r--;
+    private static boolean isPalindromic(String s, int start, int end) {
+        while (start < end) {
+            if (s.charAt(start) != s.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
         }
         return true;
     }
