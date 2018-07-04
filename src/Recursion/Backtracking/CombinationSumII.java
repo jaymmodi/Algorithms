@@ -7,7 +7,7 @@ import java.util.List;
 public class CombinationSumII {
 
     public static void main(String[] args) {
-        int[] candidates = {3,1,3,5,1,1};
+        int[] candidates = {3, 1, 3, 5, 1, 1};
 
         System.out.println(combinationSum2(candidates, 8));
     }
