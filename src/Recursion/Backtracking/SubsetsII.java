@@ -1,25 +1,14 @@
 package Recursion.Backtracking;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class SubsetsII {
 
     public static void main(String[] args) {
-        int[] nums = {1, 2, 2};
+        int[] nums = {4, 4, 4, 1, 4};
 
         List<List<Integer>> sets = subsets(nums);
-
-        for (List<Integer> set : sets) {
-            System.out.println("set --- ");
-
-            for (Integer integer : set) {
-                System.out.println(integer);
-            }
-        }
-
+        System.out.println(sets.size());
     }
 
     public static List<List<Integer>> subsets(int[] nums) {
@@ -27,6 +16,7 @@ public class SubsetsII {
         List<List<Integer>> subsets = new ArrayList<>();
 
         Set<String> subStrings = new HashSet<>();
+        Arrays.sort(nums);
         subsets(nums, 0, subset, subsets, subStrings);
 
         return subsets;
