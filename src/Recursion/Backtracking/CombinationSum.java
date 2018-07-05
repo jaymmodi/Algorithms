@@ -6,9 +6,9 @@ import java.util.List;
 public class CombinationSum {
 
     public static void main(String[] args) {
-        int[] candidates = {2, 3, 5};
+        int[] candidates = {4, 2, 1};
 
-        System.out.println(combinationSum(candidates, 50));
+        System.out.println(combinationSum(candidates, 4));
     }
 
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
@@ -28,7 +28,7 @@ public class CombinationSum {
         if (target == 0) {
             result.add(new ArrayList<>(currentList));
         } else {
-            for (int i = start; i <= candidates.length - 1; i++) {
+            for (int i = 0; i <= candidates.length - 1; i++) {
                 int currentNumber = candidates[i];
 
                 if (target - currentNumber >= 0) {
