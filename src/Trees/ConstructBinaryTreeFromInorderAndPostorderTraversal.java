@@ -1,5 +1,8 @@
 package Trees;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
     public static void main(String[] args) {
 //        int[] inorder = {4, 8, 3, 1, 5, 2};
@@ -19,12 +22,18 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
             return null;
         }
 
+        Map<Integer, Integer> inOrderIndexMap = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            inOrderIndexMap.put(inorder[i], i);
+        }
+
         int postIndex = postorder.length - 1;
-        int inIndex = find(inorder, postorder[postIndex]);
-        return buildTreeHelper(inorder, postorder, 0, inorder.length - 1, inIndex, postIndex);
+        int inIndex = inOrderIndexMap.get(postorder[postIndex]);
+
+        return buildTreeHelper(inorder, postorder, 0, inorder.length - 1, inIndex, postIndex, inOrderIndexMap);
     }
 
-    private static TreeNode buildTreeHelper(int[] inorder, int[] postorder, int start, int end, int inIndex, int postIndex) {
+    private static TreeNode buildTreeHelper(int[] inorder, int[] postorder, int start, int end, int inIndex, int postIndex, Map<Integer, Integer> inOrderIndexMap) {
         if (start == end) {
             return new TreeNode(inorder[start]);
         }
@@ -35,30 +44,20 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
             if (start < inIndex) {
                 int number = end - inIndex + 1;
                 int nextpostIndex = postIndex - number;
-                int nextinIndex = find(inorder, postorder[nextpostIndex]);
+                int nextinIndex = inOrderIndexMap.get(postorder[nextpostIndex]);
 
-                root.left = buildTreeHelper(inorder, postorder, start, inIndex - 1, nextinIndex, nextpostIndex);
+                root.left = buildTreeHelper(inorder, postorder, start, inIndex - 1, nextinIndex, nextpostIndex, inOrderIndexMap);
             }
 
             if (inIndex < end) {
                 int nextpostIndex = postIndex - 1;
-                int nextinIndex = find(inorder, postorder[nextpostIndex]);
+                int nextinIndex = inOrderIndexMap.get(postorder[nextpostIndex]);
 
-                root.right = buildTreeHelper(inorder, postorder, inIndex + 1, end, nextinIndex, nextpostIndex);
+                root.right = buildTreeHelper(inorder, postorder, inIndex + 1, end, nextinIndex, nextpostIndex, inOrderIndexMap);
             }
             return root;
         } else {
             return null;
         }
-    }
-
-    private static int find(int[] array, int value) {
-        int index = -1;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == value) {
-                return i;
-            }
-        }
-        return index;
     }
 }
