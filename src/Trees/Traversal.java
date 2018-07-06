@@ -15,7 +15,7 @@ public class Traversal {
 
     public static void preorder(TreeNode root) {
         if (root != null) {
-            System.out.print(root.val);
+            System.out.print(root.val + " ");
             preorder(root.left);
             preorder(root.right);
         }
