@@ -24,7 +24,7 @@ public class Traversal {
     public static void inorder(TreeNode root) {
         if (root != null) {
             inorder(root.left);
-            System.out.print(root.val);
+            System.out.print(root.val + " ");
             inorder(root.right);
         }
     }
@@ -33,7 +33,7 @@ public class Traversal {
         if (root != null) {
             postOrder(root.left);
             postOrder(root.right);
-            System.out.print(root.val);
+            System.out.print(root.val + " ");
         }
     }
 }
