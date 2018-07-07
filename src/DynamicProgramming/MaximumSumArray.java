@@ -6,7 +6,6 @@ public class MaximumSumArray {
     public static void main(String[] args) {
         int array[] = {10,-10,-10};
 
-        int sum = Integer.MIN_VALUE;
         int[] savedArray = new int[array.length];
 
         if (array[0] > 0) {
@@ -14,10 +13,10 @@ public class MaximumSumArray {
         } else {
             savedArray[0] = 0;
         }
-        System.out.println(findMaxSumContinuousArray(array, sum, savedArray));
+        System.out.println(findMaxSumContinuousArray(array, savedArray));
     }
 
-    private static int findMaxSumContinuousArray(int[] array, int sum, int[] savedArray) {
+    private static int findMaxSumContinuousArray(int[] array, int[] savedArray) {
         if (array.length == 0) {
             return 0;
         }
