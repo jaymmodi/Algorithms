@@ -1,7 +1,5 @@
 package Arrays;
 
-import java.util.Arrays;
-
 public class PivotIndex {
     public static void main(String[] args) {
         int[] nums = {1, 7, 3, 6, 5, 6};
@@ -62,6 +60,11 @@ public class PivotIndex {
     }
 
     private static int sum(int[] nums) {
-        return Arrays.stream(nums).sum();
+        int sum = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+        }
+        return sum;
     }
 }
