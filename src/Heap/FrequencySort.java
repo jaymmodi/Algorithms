@@ -1,7 +1,5 @@
 package Heap;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.PriorityQueue;
 
 public class FrequencySort {
@@ -14,21 +12,18 @@ public class FrequencySort {
 
     public static String frequencySort(String s) {
 
-        Map<Character, Integer> countMap = new HashMap<>();
-
+        int[] count = new int[256];
         for (char c : s.toCharArray()) {
-            Integer count = countMap.getOrDefault(c, 0);
-
-            countMap.put(c, ++count);
+            count[c]++;
         }
 
         PriorityQueue<Character> queue = new PriorityQueue<>((c1, c2) -> {
-            if (countMap.get(c1) > countMap.get(c2)) {
+            if (count[c1] > count[c2]) {
                 return -1;
-            } else if (countMap.get(c1) < countMap.get(c2)) {
+            } else if (count[c1] < count[c2]) {
                 return 1;
             } else {
-                return c1-c2;
+                return c1 - c2;
             }
         });
 
