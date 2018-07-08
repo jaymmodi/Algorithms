@@ -12,11 +12,7 @@ public class Permutation {
         char[] chars = str.toCharArray();
         boolean[] visited = new boolean[chars.length];
 
-        for (int i = 0; i < chars.length; i++) {
-            visited[i] = true;
-            permute(chars, visited, "" + chars[i]);
-            visited[i] = false;
-        }
+        permute(chars, visited, "");
     }
 
     private static void permute(char[] chars, boolean[] visited, String currentString) {
