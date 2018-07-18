@@ -4,21 +4,21 @@ public class UniqueBinarySearchTrees {
 
     // Catalan number
     public static void main(String[] args) {
-        System.out.println(numTrees(19));
+        System.out.println(numTrees(4));
     }
 
-    public static int numTrees(int n) {
-        int memory[] = new int[n+1];
-        memory[0] =1;
-        if(n >= 1){
-            memory[1] =1;
+    private static int numTrees(int n) {
+        int memory[] = new int[n + 1];
+        memory[0] = 1;
+        if (n >= 1) {
+            memory[1] = 1;
         }
 
         return numTreesHelper(n, memory);
     }
 
-    private static int numTreesHelper(int n, int[] memory){
-        if(memory[n]!=0){
+    private static int numTreesHelper(int n, int[] memory) {
+        if (memory[n] != 0) {
             return memory[n];
         }
 
