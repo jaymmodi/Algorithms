@@ -1,7 +1,6 @@
 package Misc;
 
 public class DuplicateNumber {
-    
 
     public int findDuplicate(int[] nums) {
         int index = 0;
